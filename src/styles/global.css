@@ -1,18 +1,18 @@
 :root {
-	--bg: #fff8ef;
+	--bg: #fff4f1;
 	--surface: #ffffff;
 	--text: #101010;
 	--border: #101010;
-	--accent: #ffe34f;
+	--accent: #ff9e8a;
 	--danger: #ff7d7d;
 }
 
 :root[data-theme="dark"] {
-	--bg: #111111;
+	--bg: #15110f;
 	--surface: #1a1a1a;
 	--text: #f6f6f6;
 	--border: #f6f6f6;
-	--accent: #5b4b00;
+	--accent: #c2410c;
 	--danger: #6a2323;
 }
 
@@ -88,6 +88,13 @@ button {
 	background: var(--accent);
 }
 
+.hero-head {
+	display: flex;
+	justify-content: space-between;
+	align-items: flex-start;
+	gap: 0.75rem;
+}
+
 .hero h1 {
 	margin: 0 0 0.35rem;
 	font-size: clamp(1.8rem, 3vw, 2.4rem);
@@ -115,16 +122,11 @@ button {
 	gap: 0.5rem;
 }
 
-.controls-head,
 .controls-row {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
 	gap: 0.6rem;
-}
-
-.controls label {
-	font-weight: 700;
 }
 
 .icon-toggle {
@@ -141,6 +143,7 @@ button {
 .count {
 	margin: 0;
 	font-size: 0.9rem;
+	font-weight: 700;
 }
 
 .grid-shell {
@@ -200,5 +203,16 @@ tbody tr:nth-child(even) {
 @media (max-width: 719px) {
 	.grid-shell {
 		max-height: calc(100vh - 15rem);
+	}
+
+	table {
+		min-width: 0;
+	}
+
+	table th:nth-child(1),
+	table td:nth-child(1),
+	table th:nth-child(4),
+	table td:nth-child(4) {
+		display: none;
 	}
 }

@@ -38,8 +38,25 @@ const { title = "Watched Reviews" } = Astro.props;
 				return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
 			};
 
+			const syncThemeIcon = () => {
+				const theme = root.getAttribute("data-theme") === "dark" ? "dark" : "light";
+				document.querySelectorAll("[data-theme-icon]").forEach((node) => {
+					node.textContent = theme === "dark" ? "☀️" : "🌙";
+				});
+			};
+
 			const initial = getPreferredTheme();
 			root.setAttribute("data-theme", initial);
+			syncThemeIcon();
+
+			document.querySelectorAll("[data-theme-toggle]").forEach((button) => {
+				button.addEventListener("click", () => {
+					const next = root.getAttribute("data-theme") === "dark" ? "light" : "dark";
+					localStorage.setItem(storageKey, next);
+					root.setAttribute("data-theme", next);
+					syncThemeIcon();
+				});
+			});
 		</script>
 	</body>
 </html>

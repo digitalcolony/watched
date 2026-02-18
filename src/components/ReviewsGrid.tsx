@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import type { ReviewData } from "../types/review";
 
 type SortKey = "timestamp" | "show_name" | "review" | "show_type";
@@ -31,30 +31,6 @@ export default function ReviewsGrid({ reviews }: ReviewsGridProps) {
 	const [query, setQuery] = useState("");
 	const [sortKey, setSortKey] = useState<SortKey>("timestamp");
 	const [sortDirection, setSortDirection] = useState<SortDirection>("desc");
-	const [theme, setTheme] = useState<"light" | "dark">("light");
-
-	useEffect(() => {
-		const root = document.documentElement;
-		const storageKey = "watched-theme";
-		const saved = localStorage.getItem(storageKey);
-		const initial =
-			saved === "light" || saved === "dark"
-				? saved
-				: window.matchMedia("(prefers-color-scheme: dark)").matches
-					? "dark"
-					: "light";
-
-		root.setAttribute("data-theme", initial);
-		setTheme(initial);
-	}, []);
-
-	const toggleTheme = () => {
-		const storageKey = "watched-theme";
-		const next = theme === "dark" ? "light" : "dark";
-		document.documentElement.setAttribute("data-theme", next);
-		localStorage.setItem(storageKey, next);
-		setTheme(next);
-	};
 
 	const filteredAndSorted = useMemo(() => {
 		const normalizedQuery = query.trim().toLowerCase();
@@ -92,17 +68,6 @@ export default function ReviewsGrid({ reviews }: ReviewsGridProps) {
 	return (
 		<div className="reviews-module">
 			<div className="controls">
-				<div className="controls-head">
-					<label htmlFor="review-search">Search</label>
-					<button
-						type="button"
-						className="icon-toggle"
-						onClick={toggleTheme}
-						aria-label={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
-					>
-						{theme === "dark" ? "☀️" : "🌙"}
-					</button>
-				</div>
 				<div className="controls-row">
 					<input
 						id="review-search"
