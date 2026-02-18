@@ -1,0 +1,188 @@
+:root {
+	--bg: #fff8ef;
+	--surface: #ffffff;
+	--text: #101010;
+	--border: #101010;
+	--accent: #ffe34f;
+	--danger: #ff7d7d;
+}
+
+:root[data-theme="dark"] {
+	--bg: #111111;
+	--surface: #1a1a1a;
+	--text: #f6f6f6;
+	--border: #f6f6f6;
+	--accent: #5b4b00;
+	--danger: #6a2323;
+}
+
+* {
+	box-sizing: border-box;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+	background: var(--bg);
+	color: var(--text);
+	font-family:
+		Inter,
+		system-ui,
+		-apple-system,
+		Segoe UI,
+		Roboto,
+		sans-serif;
+	min-height: 100%;
+}
+
+body {
+	padding: 1rem;
+}
+
+button,
+input {
+	font: inherit;
+	color: inherit;
+	background: var(--surface);
+	border: 3px solid var(--border);
+	padding: 0.45rem 0.7rem;
+	box-shadow: 4px 4px 0 var(--border);
+}
+
+button {
+	cursor: pointer;
+}
+
+.page-wrap {
+	max-width: 1200px;
+	margin: 0 auto;
+	display: grid;
+	gap: 1rem;
+}
+
+.panel {
+	background: var(--surface);
+	border: 3px solid var(--border);
+	box-shadow: 6px 6px 0 var(--border);
+	padding: 1rem;
+}
+
+.hero {
+	background: var(--accent);
+}
+
+.hero h1 {
+	margin: 0 0 0.35rem;
+	font-size: clamp(1.8rem, 3vw, 2.4rem);
+}
+
+.hero p {
+	margin: 0;
+}
+
+.error-panel {
+	background: var(--danger);
+}
+
+.error-panel p {
+	margin: 0.4rem 0 0;
+}
+
+.reviews-module {
+	display: grid;
+	gap: 0.8rem;
+}
+
+.controls {
+	display: grid;
+	gap: 0.5rem;
+}
+
+.controls-head,
+.controls-row {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	gap: 0.6rem;
+}
+
+.controls label {
+	font-weight: 700;
+}
+
+.icon-toggle {
+	min-width: 2.4rem;
+	padding: 0.35rem 0.55rem;
+	line-height: 1;
+}
+
+.controls input {
+	width: calc(100% - 50px);
+	background: var(--bg);
+}
+
+.count {
+	margin: 0;
+	font-size: 0.9rem;
+}
+
+.grid-shell {
+	border: 3px solid var(--border);
+	overflow: auto;
+	max-height: calc(100vh - 17rem);
+	background: var(--surface);
+}
+
+table {
+	width: 100%;
+	border-collapse: collapse;
+	min-width: 860px;
+}
+
+th,
+td {
+	padding: 0.65rem;
+	vertical-align: top;
+	text-align: left;
+	border-bottom: 2px solid var(--border);
+	border-right: 2px solid var(--border);
+}
+
+th:last-child,
+td:last-child {
+	border-right: 0;
+}
+
+thead th {
+	position: sticky;
+	top: 0;
+	z-index: 1;
+	background: var(--accent);
+	padding: 0;
+}
+
+th button {
+	width: 100%;
+	text-align: left;
+	border: 0;
+	padding: 0.65rem;
+	box-shadow: none;
+	background: transparent;
+}
+
+tbody tr:nth-child(even) {
+	background: color-mix(in srgb, var(--surface) 80%, var(--bg) 20%);
+}
+
+@media (min-width: 720px) {
+	body {
+		padding: 1.5rem;
+	}
+}
+
+@media (max-width: 719px) {
+	.grid-shell {
+		max-height: calc(100vh - 15rem);
+	}
+}

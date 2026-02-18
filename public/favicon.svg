@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+    <rect width="64" height="64" rx="8" class="bg" />
+    <rect x="8" y="8" width="48" height="32" rx="2" class="tv" />
+    <rect x="14" y="14" width="24" height="12" class="screen" />
+    <rect x="42" y="14" width="8" height="4" class="screen" />
+    <rect x="42" y="22" width="8" height="4" class="screen" />
+    <path d="M20 40L14 50H50L44 40" class="line" />
+    <path d="M20 46L28 42L36 48L44 44" class="film" />
+    <circle cx="21" cy="43" r="1.4" class="dot" />
+    <circle cx="29" cy="47" r="1.4" class="dot" />
+    <circle cx="36" cy="43" r="1.4" class="dot" />
+    <circle cx="43" cy="47" r="1.4" class="dot" />
+    <style>
+        .bg { fill: #fff8ef; }
+        .tv { fill: #ffffff; stroke: #101010; stroke-width: 3; }
+        .screen { fill: #ffe34f; stroke: #101010; stroke-width: 2.5; }
+        .line { stroke: #101010; stroke-width: 3; stroke-linecap: square; }
+        .film { stroke: #101010; stroke-width: 2.5; stroke-linecap: square; stroke-linejoin: bevel; }
+        .dot { fill: #101010; }
+
+        @media (prefers-color-scheme: dark) {
+            .bg { fill: #111111; }
+            .tv { fill: #1a1a1a; stroke: #f6f6f6; }
+            .screen { fill: #5b4b00; stroke: #f6f6f6; }
+            .line, .film { stroke: #f6f6f6; }
+            .dot { fill: #f6f6f6; }
+        }
+    </style>
+</svg>

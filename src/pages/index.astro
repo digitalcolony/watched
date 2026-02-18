@@ -1,0 +1,39 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import ReviewsGrid from "../components/ReviewsGrid";
+import { getReviews } from "../lib/reviews";
+import type { ReviewData } from "../types/review";
+
+const siteTitle = import.meta.env.PUBLIC_SITE_TITLE || "TV and Movie Reviews 📺";
+
+let reviews: ReviewData[] = [];
+let loadError = "";
+
+try {
+	reviews = await getReviews();
+} catch (error) {
+	loadError = error instanceof Error ? error.message : "Unable to load reviews.";
+}
+---
+
+<BaseLayout title={siteTitle}>
+	<main class="page-wrap">
+		<section class="hero panel">
+			<h1>TV and Movie Reviews 📺</h1>
+			<p>Keeping track of the TV shows 📺 and movies 🎦 I've watched since 2021.</p>
+		</section>
+
+		{
+			loadError ? (
+				<section class="panel error-panel">
+					<strong>Data load error</strong>
+					<p>{loadError}</p>
+				</section>
+			) : (
+				<section class="panel">
+					<ReviewsGrid client:load reviews={reviews} />
+				</section>
+			)
+		}
+	</main>
+</BaseLayout>
