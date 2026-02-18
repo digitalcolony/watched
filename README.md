@@ -9,9 +9,7 @@ interface ReviewData {
 	timestamp: string;
 	show_name: string;
 	review: string;
-	finished: string;
 	show_type: string;
-	comments: string;
 }
 ```
 
@@ -73,3 +71,7 @@ Netlify settings:
 - `npm run dev` — local development server
 - `npm run build` — production build to `dist`
 - `npm run preview` — preview built site locally
+
+## License
+
+This project is released under The Unlicense. See `LICENSE` for full text.

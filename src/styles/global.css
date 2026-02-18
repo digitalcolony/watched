@@ -61,6 +61,22 @@ button {
 	gap: 1rem;
 }
 
+.site-footer {
+	max-width: 1200px;
+	margin: 1rem auto 0;
+	padding: 0.75rem 1rem;
+}
+
+.site-footer p {
+	margin: 0;
+	font-size: 0.95rem;
+}
+
+.site-footer a {
+	color: inherit;
+	font-weight: 700;
+}
+
 .panel {
 	background: var(--surface);
 	border: 3px solid var(--border);

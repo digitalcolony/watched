@@ -19,6 +19,14 @@ const { title = "Watched Reviews" } = Astro.props;
 	</head>
 	<body>
 		<slot />
+		<footer class="site-footer panel">
+			<p>
+				Site by Michael Allen Smith. Code is freely available on
+				<a href="https://github.com/digitalcolony/watched" target="_blank" rel="noreferrer"
+					>GitHub</a
+				>
+			</p>
+		</footer>
 
 		<script>
 			const root = document.documentElement;
