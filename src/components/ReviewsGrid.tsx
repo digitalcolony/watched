@@ -69,13 +69,25 @@ export default function ReviewsGrid({ reviews }: ReviewsGridProps) {
 		<div className="reviews-module">
 			<div className="controls">
 				<div className="controls-row">
-					<input
-						id="review-search"
-						type="search"
-						placeholder="Search title"
-						value={query}
-						onChange={(event) => setQuery(event.target.value)}
-					/>
+					<div className="search-wrap">
+						<input
+							id="review-search"
+							type="search"
+							placeholder="Search title"
+							value={query}
+							onChange={(event) => setQuery(event.target.value)}
+						/>
+						{query ? (
+							<button
+								type="button"
+								className="search-clear"
+								aria-label="Clear search"
+								onClick={() => setQuery("")}
+							>
+								×
+							</button>
+						) : null}
+					</div>
 					<p className="count">{filteredAndSorted.length} result(s)</p>
 				</div>
 			</div>
