@@ -34,20 +34,39 @@ const extractRows = (payload: unknown): unknown[] => {
 };
 
 export const getReviews = async (): Promise<ReviewData[]> => {
-	const endpoint = import.meta.env.REVIEWS_ENDPOINT;
+	const endpoint = (
+		import.meta.env.REVIEWS_ENDPOINT ??
+		import.meta.env.PUBLIC_REVIEWS_ENDPOINT ??
+		""
+	).trim();
 
 	if (!endpoint) {
-		throw new Error("Missing REVIEWS_ENDPOINT environment variable.");
+		throw new Error(
+			"Missing REVIEWS_ENDPOINT environment variable (or PUBLIC_REVIEWS_ENDPOINT fallback).",
+		);
 	}
 
-	const response = await fetch(endpoint, {
+	let normalizedEndpoint = endpoint;
+
+	try {
+		normalizedEndpoint = new URL(endpoint).toString();
+	} catch {
+		throw new Error(`REVIEWS_ENDPOINT is not a valid URL: ${endpoint}`);
+	}
+
+	const response = await fetch(normalizedEndpoint, {
 		headers: {
 			accept: "application/json",
 		},
+		redirect: "follow",
 	});
 
 	if (!response.ok) {
-		throw new Error(`Reviews fetch failed with status ${response.status}.`);
+		const bodySample = (await response.text()).slice(0, 180).replace(/\s+/g, " ").trim();
+		const resolvedUrl = response.url || normalizedEndpoint;
+		throw new Error(
+			`Reviews fetch failed with status ${response.status} (${response.statusText}) from ${resolvedUrl}. Body preview: ${bodySample || "<empty>"}`,
+		);
 	}
 
 	const payload = await response.json();
