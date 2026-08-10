@@ -27,6 +27,30 @@ const sortValue = (review: ReviewData, key: SortKey) => {
 	return review[key].toLowerCase();
 };
 
+const exportReviews = (items: ReviewData[]) => {
+	const exportItems = items.map((item) => {
+		const starCount = (item.review.match(/⭐/g) || []).length;
+		return {
+			timestamp: item.timestamp,
+			show_name: item.show_name,
+			review_1_to_5: Number.isFinite(starCount) ? starCount : 0,
+			show_type: item.show_type,
+		};
+	});
+
+	const payload = JSON.stringify(exportItems, null, 2);
+	const blob = new Blob([payload], { type: "application/json" });
+	const url = URL.createObjectURL(blob);
+	const link = document.createElement("a");
+	link.href = url;
+	link.download = `reviews-${new Date().toISOString().slice(0, 10)}.json`;
+	link.style.display = "none";
+	document.body.appendChild(link);
+	link.click();
+	link.remove();
+	URL.revokeObjectURL(url);
+};
+
 export default function ReviewsGrid({ reviews }: ReviewsGridProps) {
 	const [query, setQuery] = useState("");
 	const [sortKey, setSortKey] = useState<SortKey>("timestamp");
@@ -88,7 +112,16 @@ export default function ReviewsGrid({ reviews }: ReviewsGridProps) {
 							</button>
 						) : null}
 					</div>
-					<p className="count">{filteredAndSorted.length} result(s)</p>
+					<div className="controls-actions">
+						<p className="count">{filteredAndSorted.length} result(s)</p>
+						<button
+							type="button"
+							className="export-button"
+							onClick={() => exportReviews(filteredAndSorted)}
+						>
+							Export JSON
+						</button>
+					</div>
 				</div>
 			</div>
 

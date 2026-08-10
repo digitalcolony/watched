@@ -127,11 +127,13 @@ button {
 	justify-content: space-between;
 	align-items: center;
 	gap: 0.6rem;
+	flex-wrap: wrap;
 }
 
 .search-wrap {
 	position: relative;
-	width: calc(100% - 50px);
+	flex: 1 1 280px;
+	max-width: 360px;
 }
 
 .icon-toggle {
@@ -178,10 +180,22 @@ button {
 	font-weight: 700;
 }
 
+.controls-actions {
+	display: flex;
+	align-items: center;
+	gap: 0.6rem;
+	flex-wrap: wrap;
+	margin-left: auto;
+}
+
 .count {
 	margin: 0;
 	font-size: 0.9rem;
 	font-weight: 700;
+}
+
+.export-button {
+	white-space: nowrap;
 }
 
 .grid-shell {
