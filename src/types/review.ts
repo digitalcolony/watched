@@ -3,4 +3,5 @@ export interface ReviewData {
 	show_name: string;
 	review: string;
 	show_type: string;
+	seenBefore2021: string;
 }

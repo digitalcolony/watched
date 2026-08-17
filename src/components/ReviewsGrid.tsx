@@ -4,6 +4,8 @@ import type { ReviewData } from "../types/review";
 type SortKey = "timestamp" | "show_name" | "review" | "show_type";
 type SortDirection = "asc" | "desc";
 
+const BEFORE_2021_TIMESTAMP = new Date("2020-01-01").getTime();
+
 interface ReviewsGridProps {
 	reviews: ReviewData[];
 }
@@ -13,14 +15,22 @@ const parseDateValue = (input: string) => {
 	return Number.isNaN(timestamp) ? 0 : timestamp;
 };
 
+const isSeenBefore2021 = (value: string) => value.trim().toLowerCase() === "yes";
+
 const formatMonthYear = (input: string) => {
 	const date = new Date(input);
 	if (Number.isNaN(date.getTime())) return input || "—";
 	return new Intl.DateTimeFormat("en-US", { month: "long", year: "numeric" }).format(date);
 };
 
+const displayDate = (review: ReviewData) => {
+	if (isSeenBefore2021(review.seenBefore2021)) return "Before 2021";
+	return formatMonthYear(review.timestamp);
+};
+
 const sortValue = (review: ReviewData, key: SortKey) => {
 	if (key === "timestamp") {
+		if (isSeenBefore2021(review.seenBefore2021)) return BEFORE_2021_TIMESTAMP;
 		return parseDateValue(review.timestamp);
 	}
 
@@ -154,7 +164,7 @@ export default function ReviewsGrid({ reviews }: ReviewsGridProps) {
 					<tbody>
 						{filteredAndSorted.map((item, index) => (
 							<tr key={`${item.show_name}-${item.timestamp}-${index}`}>
-								<td>{formatMonthYear(item.timestamp)}</td>
+								<td>{displayDate(item)}</td>
 								<td>{item.show_name || "—"}</td>
 								<td>{item.review || "—"}</td>
 								<td>{item.show_type || "—"}</td>

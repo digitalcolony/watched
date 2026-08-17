@@ -13,6 +13,7 @@ const toReviewData = (value: unknown): ReviewData => {
 		show_name: asText(row.show_name),
 		review: asText(row.review),
 		show_type: asText(row.show_type),
+		seenBefore2021: asText(row.seenBefore2021),
 	};
 };
 
